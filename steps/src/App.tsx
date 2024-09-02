@@ -8,9 +8,9 @@ function App() {
   const [step, setStep] = useState(1);
   const [hidden, setHidden] = useState(false);
   const steps = [
-    { id: 1, title: "Learn React" },
-    { id: 2, title: "Learn Tailwind" },
-    { id: 3, title: "Learn TypeScript" },
+    { id: 1, title: "Learn React 🍦" },
+    { id: 2, title: "Learn Tailwind 🎅" },
+    { id: 3, title: "Learn TypeScript 🏙️" },
   ];
 
   const handleNext = () => {
