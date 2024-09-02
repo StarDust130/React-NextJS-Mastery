@@ -11,7 +11,7 @@ const Items = () => {
     <>
       <div className="bg-amber-800  h-full w-full flex justify-evenly py-5">
         {initialItems.map((item) => (
-          <Item item={item} />
+          <Item item={item} key={item.id} />
         ))}
       </div>
       <Filters />
