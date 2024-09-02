@@ -28,7 +28,11 @@ function App() {
       <div className="bg-gray-100 w-[80%] h-40">
         <div className="h-[30%] flex justify-evenly items-center">
           {steps.map((_, index) => (
-            <Circle key={index} value={index + 1} />
+            <Circle
+              key={index}
+              value={index + 1}
+              isActive={index + 1 <= step}
+            />
           ))}
         </div>
 
