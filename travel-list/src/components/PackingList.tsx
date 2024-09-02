@@ -6,7 +6,12 @@ const initialItems = [
   { id: 2, description: "Socks", quantity: 12, packed: false },
 ];
 
-const Items = () => {
+interface PackingListProps {
+  desc: string;
+  setDesc: (desc: string) => void;
+}
+
+const PackingList = ({ desc, setDesc }: PackingListProps) => {
   return (
     <>
       <div className="bg-amber-800  h-full w-full flex justify-evenly py-5">
@@ -18,4 +23,4 @@ const Items = () => {
     </>
   );
 };
-export default Items;
+export default PackingList;
