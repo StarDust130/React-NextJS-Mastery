@@ -1,4 +1,4 @@
-import Filters from "./Filters";
+import Filters from "./Form";
 
 const Items = () => {
   return (

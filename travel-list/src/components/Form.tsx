@@ -6,13 +6,10 @@ const Filters = () => {
           SORT BY INPUT ORDER
         </option>
         <option className="text-sm" value="">
-          SORT BY NAME
+          SORT BY DESCRIPTION
         </option>
         <option className="text-sm" value="">
-          SORT BY DATE
-        </option>
-        <option className="text-sm" value="">
-          SORT BY PRIORITY
+          SORT BY PACKED STATUS
         </option>
       </select>
       <button className="w-20 h-6 bg-blue-500 text-white text-xs rounded-2xl shadow-lg hover:bg-blue-700 transition-colors duration-300">

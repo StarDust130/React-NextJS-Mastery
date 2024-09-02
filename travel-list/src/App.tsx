@@ -1,7 +1,7 @@
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Items from "./components/Items";
+import Items from "./components/PackingList";
 import Search from "./components/Search";
 
 function App() {
