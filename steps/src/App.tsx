@@ -13,19 +13,13 @@ function App() {
     { id: 3, title: "Learn TypeScript 🏙️" },
   ];
 
-const handleNext = () => {
-  setStep((prevStep) => {
-    const nextStep = prevStep === steps.length ? 1 : prevStep + 1;
-    if (nextStep === 1) {
-      setHidden(true); // Hide the component if looping back to the start
-    }
-    return nextStep;
-  });
-};
+  const handleNext = () => {
+    setStep((currStep) => currStep + 1);
+  };
 
-const handlePrevious = () => {
-  setStep((prevStep) => (prevStep === 1 ? 1 : prevStep - 1));
-};
+  const handlePrevious = () => {
+    setStep((currStep) => (currStep === 1 ? 1 : currStep - 1));
+  };
 
   if (hidden) return null;
 
