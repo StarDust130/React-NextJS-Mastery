@@ -6,60 +6,69 @@ import PackingList from "./components/PackingList";
 import Search from "./components/Search";
 import Filters from "./components/Filters";
 
-//! Initial items 🛫
-const initialItems = [
-  { id: 1, desc: "Passports", qty: 2, packed: false },
-  { id: 2, desc: "Socks", qty: 12, packed: false },
-];
+interface ItemType {
+  id: number;
+  desc: string;
+  qty: number;
+  packed: boolean;
+}
 
 function App() {
-  const [items, setItems] = useState(initialItems); //! State for items 🧳
+  const [items, setItems] = useState<ItemType[]>([]); //! State for items 🧳
   const [desc, setDesc] = useState(""); //! State for item description 📝
   const [qty, setQty] = useState(1); //! State for item quantity 🔢
+  const [sortType, setSortType] = useState("inputOrder"); //! State for sorting type 🔄
 
   //! Handle item submission 🚀
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!desc) return alert("Please enter an item");
-    setItems([...items, { id: Date.now(), desc, qty, packed: false }]);
+    const newItem: ItemType = { id: Date.now(), desc, qty, packed: false };
+    const newItems = [...items, newItem];
+    setItems(applySort(newItems, sortType)); //! Sort after adding item
     setDesc(""); //! Reset description
     setQty(1); //! Reset quantity
   };
 
   //! Handle item deletion 🗑️
-  const handleDelete = (id: number) =>
-    setItems(items.filter((item) => item.id !== id));
+  const handleDelete = (id: number) => {
+    const updatedItems = items.filter((item) => item.id !== id);
+    setItems(applySort(updatedItems, sortType)); //! Sort after deleting item
+  };
 
   //! Toggle packed status 📦
   const handleTogglePacked = (id: number) => {
-    setItems(
-      items.map((item) =>
-        item.id === id ? { ...item, packed: !item.packed } : item
-      )
+    const updatedItems = items.map((item) =>
+      item.id === id ? { ...item, packed: !item.packed } : item
     );
+    setItems(applySort(updatedItems, sortType)); //! Sort after toggling packed status
   };
 
   //! Toggle all items 📦
   const handleToggleAll = () => {
-    // Check if all items are currently packed
     const allPacked = items.every((item) => item.packed);
-
-    // If all are packed, unpack all; otherwise, pack all
-    setItems(items.map((item) => ({ ...item, packed: !allPacked })));
+    const updatedItems = items.map((item) => ({ ...item, packed: !allPacked }));
+    setItems(applySort(updatedItems, sortType)); //! Sort after toggling all items
   };
 
   //! Clear all items 🧹
   const handleClearAll = () => setItems([]);
 
-  //! Handle sorting options 🔄
-  const handleSort = (sortType: string) => {
+  //! Apply sorting based on sort type 🔄
+  const applySort = (items: ItemType[], sortType: string) => {
     const sortedItems = [...items];
     if (sortType === "inputOrder") sortedItems.sort((a, b) => a.id - b.id); //! Sort by input order (by using id)
     if (sortType === "description")
       sortedItems.sort((a, b) => a.desc.localeCompare(b.desc)); //! Sort by Aplhabetical order
     if (sortType === "packedStatus")
       sortedItems.sort((a, b) => Number(a.packed) - Number(b.packed)); //! Sort by packed status
-    setItems(sortedItems);
+    return sortedItems;
+  };
+
+  //! Handle sorting options 🔄
+  const handleSort = (sortType: string) => {
+    setSortType(sortType); //! Set the selected sort type
+    setItems(applySort(items, sortType)); //! Sort items when sort type changes
   };
 
   //! Calculate packed items and percentage
@@ -67,8 +76,6 @@ function App() {
   const packedCount = items.filter((item) => item.packed).length;
   const packedPercentage =
     totalItems === 0 ? 0 : Math.round((packedCount / totalItems) * 100);
-
-  console.log(packedCount);
 
   return (
     <div className="flex flex-col items-center h-screen w-full">
