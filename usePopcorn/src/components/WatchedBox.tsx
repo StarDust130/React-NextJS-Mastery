@@ -68,7 +68,7 @@ const WatchedBox = () => {
                 </p>
               </div>
             </div>
-            <StarRating />
+            <StarRating maxRating={5} />
             <WatchedList watched={watched} />
           </>
         )}
