@@ -1,8 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-const Star = ({ onClick, full }: any) => {
+const Star = ({ onClick, full, onHoverIn, onHoverOut }: any) => {
   return (
-    <span role="button" className="block cursor-pointer z-50" onClick={onClick}>
+    <span
+      role="button"
+      className="block cursor-pointer z-50"
+      onClick={onClick}
+      onMouseEnter={onHoverIn}
+      onMouseLeave={onHoverOut}
+    >
       {full ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
