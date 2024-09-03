@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import Main from "./components/Main";
 import { useState } from "react";
+import ListBox from "./components/ListBox";
 
 const tempMovieData = [
   {
@@ -35,7 +36,9 @@ export default function App() {
           Found <strong>{movies.length}</strong> results
         </p>
       </Navbar>
-      <Main movies={movies} />
+      <Main>
+        <ListBox movies={movies} />
+      </Main>
     </>
   );
 }

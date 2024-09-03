@@ -2,11 +2,11 @@
 import ListBox from "./ListBox";
 import WatchedBox from "./WatchedBox";
 
-const Main = ({ movies }: any) => {
+const Main = ({ children }: any) => {
   return (
     <>
       <main className="main">
-        <ListBox movies={movies} />
+     {children}
 
         <WatchedBox />
       </main>
