@@ -3,13 +3,13 @@
 import { useState } from "react";
 import Star from "./Star";
 
-const StarRating = ({ maxRating = 10 }: any) => {
+const StarRating = ({ maxRating = 10, color = "#fcc419" }: any) => {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
 
   return (
-    <div className="flex justify-center gap-3 items-center w-full py-2">
-      <div className="flex">
+    <div className="flex  justify-center gap-3 items-center w-full py-2">
+      <div className={`flex bg-${color}-500 `}>
         {Array.from({ length: maxRating }, (_, i) => (
           <span key={i} className="text-sm">
             <Star
@@ -17,13 +17,12 @@ const StarRating = ({ maxRating = 10 }: any) => {
               full={hoverRating >= i + 1 || rating >= i + 1}
               onHoverIn={() => setHoverRating(i + 1)}
               onHoverOut={() => setHoverRating(0)}
+              color={color}
             />
           </span>
         ))}
       </div>
-      <p className="font-semibold text-xl">
-        {hoverRating ? hoverRating : rating} / {maxRating}
-      </p>
+      <p className="font-semibold text-xl">{hoverRating || rating || ""}</p>
       <button
         className="btn"
         onClick={() => {
@@ -37,5 +36,3 @@ const StarRating = ({ maxRating = 10 }: any) => {
   );
 };
 export default StarRating;
-
-
