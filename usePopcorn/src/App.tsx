@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import Main from "./components/Main";
 import { useState } from "react";
 import ListBox from "./components/ListBox";
+import MovieList from "./components/MovieList";
 
 const tempMovieData = [
   {
@@ -37,7 +38,9 @@ export default function App() {
         </p>
       </Navbar>
       <Main>
-        <ListBox movies={movies} />
+        <ListBox>
+          <MovieList movies={movies} />
+        </ListBox>
       </Main>
     </>
   );

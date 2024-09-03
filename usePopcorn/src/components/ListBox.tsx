@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
-import MovieList from "./MovieList";
 
-const ListBox = ({ movies }: any) => {
+const ListBox = ({ children }: any) => {
   const [isOpen1, setIsOpen1] = useState(true);
   return (
     <>
@@ -15,7 +14,7 @@ const ListBox = ({ movies }: any) => {
         >
           {isOpen1 ? "–" : "+"}
         </button>
-        {isOpen1 && <MovieList movies={movies} />}
+        {isOpen1 && <>{children}</>}
       </div>
     </>
   );
