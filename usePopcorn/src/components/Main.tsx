@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import WatchedBox from "./WatchedBox";
 
 const Main = ({ children }: any) => {
   return (
     <>
       <main className="main">
-     {children}
+        {children}
+       
 
         <WatchedBox />
       </main>

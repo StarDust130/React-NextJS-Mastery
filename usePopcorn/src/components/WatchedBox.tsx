@@ -1,5 +1,6 @@
 import { useState } from "react";
 import WatchedList from "./WatchedList";
+import StarRating from "./StarRating";
 
 const tempWatchedData = [
   {
@@ -67,6 +68,7 @@ const WatchedBox = () => {
                 </p>
               </div>
             </div>
+            <StarRating />
             <WatchedList watched={watched} />
           </>
         )}
