@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Search from "./Search";
 
 
-const Navbar = () => {
-  
+const Navbar = ({ children }: any) => {
   return (
     <>
       <nav className="nav-bar">
@@ -11,11 +11,8 @@ const Navbar = () => {
           <h1>usePopcorn</h1>
         </div>
         <Search />
-      
-        <p className="num-results">
-          {/* Found <strong>{movies.length}</strong> results */}
-          x
-        </p>
+
+        {children}
       </nav>
     </>
   );
