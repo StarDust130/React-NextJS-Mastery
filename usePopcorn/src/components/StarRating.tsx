@@ -6,7 +6,7 @@ import Star from "./Star";
 const StarRating = ({ maxRating = 10 }: any) => {
   const [rating, setRating] = useState(1);
   return (
-    <div className="flex justify-center items-center w-full py-2">
+    <div className="flex justify-center gap-3 items-center w-full py-2">
       <div className="flex ">
         {Array.from({ length: maxRating }, (_, i) => (
           <span key={i} className="text-sm ">
@@ -14,7 +14,7 @@ const StarRating = ({ maxRating = 10 }: any) => {
           </span>
         ))}
       </div>
-      <p>{rating || ""}</p>
+      <p className="font-semibold text-xl">{rating || ""}</p>
     </div>
   );
 };
