@@ -40,6 +40,15 @@ function App() {
     );
   };
 
+  //! Toggle all items 📦
+  const handleToggleAll = () => {
+    // Check if all items are currently packed
+    const allPacked = items.every((item) => item.packed);
+
+    // If all are packed, unpack all; otherwise, pack all
+    setItems(items.map((item) => ({ ...item, packed: !allPacked })));
+  };
+
   //! Clear all items 🧹
   const handleClearAll = () => setItems([]);
 
@@ -77,7 +86,11 @@ function App() {
         handleDelete={handleDelete}
         handleTogglePacked={handleTogglePacked}
       />
-      <Filters handleClearAll={handleClearAll} handleSort={handleSort} />
+      <Filters
+        handleClearAll={handleClearAll}
+        handleSort={handleSort}
+        handleToggleAll={handleToggleAll}
+      />
       <Footer
         totalItems={totalItems}
         packedCount={packedCount}
