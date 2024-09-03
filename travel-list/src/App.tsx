@@ -46,13 +46,21 @@ function App() {
   //! Handle sorting options 🔄
   const handleSort = (sortType: string) => {
     const sortedItems = [...items];
-    if (sortType === "inputOrder") sortedItems.sort((a, b) => a.id - b.id);
+    if (sortType === "inputOrder") sortedItems.sort((a, b) => a.id - b.id); //! Sort by input order (by using id)
     if (sortType === "description")
-      sortedItems.sort((a, b) => a.desc.localeCompare(b.desc));
+      sortedItems.sort((a, b) => a.desc.localeCompare(b.desc)); //! Sort by Aplhabetical order
     if (sortType === "packedStatus")
-      sortedItems.sort((a, b) => Number(a.packed) - Number(b.packed));
+      sortedItems.sort((a, b) => Number(a.packed) - Number(b.packed)); //! Sort by packed status
     setItems(sortedItems);
   };
+
+  //! Calculate packed items and percentage
+  const totalItems = items.length;
+  const packedCount = items.filter((item) => item.packed).length;
+  const packedPercentage =
+    totalItems === 0 ? 0 : Math.round((packedCount / totalItems) * 100);
+
+  console.log(packedCount);
 
   return (
     <div className="flex flex-col items-center h-screen w-full">
@@ -70,7 +78,11 @@ function App() {
         handleTogglePacked={handleTogglePacked}
       />
       <Filters handleClearAll={handleClearAll} handleSort={handleSort} />
-      <Footer />
+      <Footer
+        totalItems={totalItems}
+        packedCount={packedCount}
+        packedPercentage={packedPercentage}
+      />
     </div>
   );
 }
