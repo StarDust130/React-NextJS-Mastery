@@ -3,13 +3,10 @@ interface SearchProps {
   setDesc: (desc: string) => void;
   qty: number;
   setQty: (qty: number) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const Search = ({ desc, setDesc, qty, setQty }: SearchProps) => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(desc);
-  };
+const Search = ({ desc, setDesc, qty, setQty, handleSubmit }: SearchProps) => {
   return (
     <form
       className="flex justify-center items-center h-16 w-screen bg-orange-600 gap-3"
