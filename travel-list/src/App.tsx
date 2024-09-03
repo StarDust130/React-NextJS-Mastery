@@ -1,76 +1,61 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import PackingList from "./components/PackingList";
 import Search from "./components/Search";
-import Filters from "./components/Filters"; // Ensure Filters is imported
+import Filters from "./components/Filters";
 
+//! Initial items 🛫
 const initialItems = [
   { id: 1, desc: "Passports", qty: 2, packed: false },
   { id: 2, desc: "Socks", qty: 12, packed: false },
 ];
 
 function App() {
-  const [items, setItems] = useState(initialItems);
-  const [desc, setDesc] = useState<string>("");
-  const [qty, setQty] = useState<number>(1);
-  const [sortType, setSortType] = useState<string>("");
+  const [items, setItems] = useState(initialItems); //! State for items 🧳
+  const [desc, setDesc] = useState(""); //! State for item description 📝
+  const [qty, setQty] = useState(1); //! State for item quantity 🔢
 
+  //! Handle item submission 🚀
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (!desc) {
-      alert("Please enter an item");
-      return;
-    }
-
-    const newItem = {
-      id: Date.now(),
-      desc,
-      qty,
-      packed: false,
-    };
-
-    setItems([...items, newItem]);
-
-    setDesc("");
-    setQty(1);
+    if (!desc) return alert("Please enter an item");
+    setItems([...items, { id: Date.now(), desc, qty, packed: false }]);
+    setDesc(""); //! Reset description
+    setQty(1); //! Reset quantity
   };
 
-  const handleDelete = (id: number) => {
-    const newItems = items.filter((item) => item.id !== id);
-    setItems(newItems);
-  };
+  //! Handle item deletion 🗑️
+  const handleDelete = (id: number) =>
+    setItems(items.filter((item) => item.id !== id));
 
+  //! Toggle packed status 📦
   const handleTogglePacked = (id: number) => {
-    const updatedItems = items.map((item) =>
-      item.id === id ? { ...item, packed: !item.packed } : item
+    setItems(
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
     );
-    setItems(updatedItems);
   };
 
-  const handleClearAll = () => {
-    setItems([]);
-  };
+  //! Clear all items 🧹
+  const handleClearAll = () => setItems([]);
 
+  //! Handle sorting options 🔄
   const handleSort = (sortType: string) => {
-    setSortType(sortType);
-    let sortedItems = [...items];
-
-    if (sortType === "inputOrder") {
-      sortedItems = initialItems; // Sorting by input order is the default
-    } else if (sortType === "description") {
+    const sortedItems = [...items];
+    if (sortType === "inputOrder") sortedItems.sort((a, b) => a.id - b.id);
+    if (sortType === "description")
       sortedItems.sort((a, b) => a.desc.localeCompare(b.desc));
-    } else if (sortType === "packedStatus") {
+    if (sortType === "packedStatus")
       sortedItems.sort((a, b) => Number(a.packed) - Number(b.packed));
-    }
-
     setItems(sortedItems);
   };
 
   return (
-    <div className="flex justify-center items-center flex-col h-screen w-full">
+    <div className="flex flex-col items-center h-screen w-full">
       <Header />
       <Search
         desc={desc}
