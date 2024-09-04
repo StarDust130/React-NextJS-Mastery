@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 
 const content = [
@@ -47,7 +48,7 @@ function Tabbed({ content }) {
   );
 }
 
-function Tab({ num, activeTab, onClick }) {
+function Tab({ num, activeTab, onClick }: any) {
   return (
     <button
       className={activeTab === num ? "tab active" : "tab"}
