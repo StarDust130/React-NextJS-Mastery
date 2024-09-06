@@ -1,7 +1,6 @@
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-const Search = () => {
-    const [query, setQuery] = useState("");
+const Search = ({ query, setQuery }: any) => {
   return (
     <>
       {" "}
@@ -14,5 +13,5 @@ const Search = () => {
       />
     </>
   );
-}
-export default Search
+};
+export default Search;

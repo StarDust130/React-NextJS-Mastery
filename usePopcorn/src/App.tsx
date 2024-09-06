@@ -6,20 +6,36 @@ import ListBox from "./components/ListBox";
 import MovieList from "./components/MovieList";
 import Loader from "./components/Loader";
 import ErrorMsg from "./components/ErrorMsg";
+import Search from "./components/Search";
 
 const KEY = "30c03942";
 
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const [query, setQuery] = useState("batman");
+  const [debouncedQuery, setDebouncedQuery] = useState(query);
 
+  // Debounce the query to reduce re-renders and excessive API calls
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedQuery(query);
+    }, 500); // Adjust debounce delay as needed (500ms in this case)
+
+    return () => {
+      clearTimeout(timerId); // Clean up the timer on unmount or query change
+    };
+  }, [query]);
+
+  // Fetch movies based on debounced query
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
+        setError(null); // Reset error before each request
         const response = await fetch(
-          `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=matrix`
+          `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${debouncedQuery}`
         );
 
         if (!response.ok) {
@@ -28,29 +44,28 @@ export default function App() {
 
         const data = await response.json();
 
-        if (data.response === "False") {
+        if (data.Response === "False") {
           throw new Error("Movie not found!");
         }
 
-        if (data.Response === "True") {
-          setMovies(data.Search);
-        } else {
-          throw new Error(data.Error);
-        }
+        setMovies(data.Search);
       } catch (error: any) {
         console.error("Error fetching data: ", error);
-        setError(error?.message);
+        setError(error?.message || "Something went wrong!");
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchData();
-  }, []);
+    if (debouncedQuery) {
+      fetchData();
+    }
+  }, [debouncedQuery]);
 
   return (
     <>
-      <Navbar>
+      <Navbar query={query} setQuery={setQuery}>
+        <Search query={query} setQuery={setQuery} />
         <p className="num-results">
           Found <strong>{movies.length}</strong> results
         </p>

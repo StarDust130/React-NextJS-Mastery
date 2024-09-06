@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Search from "./Search";
-
 
 const Navbar = ({ children }: any) => {
   return (
@@ -10,7 +8,6 @@ const Navbar = ({ children }: any) => {
           <span role="img">🍿</span>
           <h1>usePopcorn</h1>
         </div>
-        <Search />
 
         {children}
       </nav>
