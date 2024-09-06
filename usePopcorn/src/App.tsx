@@ -19,7 +19,7 @@ export default function App() {
       try {
         setIsLoading(true);
         const response = await fetch(
-          `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=matrix`
+          `http://www.odbapi.com/?i=tt3896198&apikey=${KEY}&s=matrix`
         );
 
         if (!response.ok) {
