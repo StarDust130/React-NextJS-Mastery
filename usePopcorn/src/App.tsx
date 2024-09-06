@@ -19,7 +19,7 @@ export default function App() {
       try {
         setIsLoading(true);
         const response = await fetch(
-          `http://www.odbapi.com/?i=tt3896198&apikey=${KEY}&s=matrix`
+          `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=matrix`
         );
 
         if (!response.ok) {
@@ -27,6 +27,10 @@ export default function App() {
         }
 
         const data = await response.json();
+
+        if (data.response === "False") {
+          throw new Error("Movie not found!");
+        }
 
         if (data.Response === "True") {
           setMovies(data.Search);
