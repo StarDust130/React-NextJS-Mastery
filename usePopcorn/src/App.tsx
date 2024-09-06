@@ -78,12 +78,24 @@ export default function App() {
       </Navbar>
       <Main>
         <ListBox>
-          {isLoading ? (
-            <Loader />
-          ) : error ? (
-            <ErrorMsg message={error} />
+          {query === "" ? (
+            <div className="flex justify-center items-center mt-40">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI808ObV0gg4r4fA0H3ItgibyJVTxCp2jq8g&usqp=CAU"
+                alt="No query"
+                width="300"
+              />
+            </div>
           ) : (
-            <MovieList movies={movies} />
+            <>
+              {isLoading ? (
+                <Loader />
+              ) : error ? (
+                <ErrorMsg message={error} />
+              ) : (
+                <MovieList movies={movies} />
+              )}
+            </>
           )}
         </ListBox>
       </Main>
