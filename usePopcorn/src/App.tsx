@@ -3,7 +3,8 @@ import Main from "./components/Main";
 import { useEffect, useState } from "react";
 import ListBox from "./components/ListBox";
 import MovieList from "./components/MovieList";
-import { Loader } from "lucide-react";
+import Loader from "./components/Loader";
+
 
 const KEY = "30c03942";
 
@@ -33,7 +34,7 @@ export default function App() {
       </Navbar>
       <Main>
         <ListBox>
-          {isLoading ? <Loader /> : <MovieList movies={movies} />}
+          {!isLoading ? <Loader /> : <MovieList movies={movies} />}
         </ListBox>
       </Main>
     </>
