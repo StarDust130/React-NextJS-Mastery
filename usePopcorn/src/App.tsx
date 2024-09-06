@@ -33,6 +33,7 @@ export default function App() {
     const fetchData = async () => {
       try {
         setIsLoading(true);
+        setError("");
         setError(null); // Reset error before each request
         const response = await fetch(
           `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${debouncedQuery}`
@@ -56,6 +57,11 @@ export default function App() {
         setIsLoading(false);
       }
     };
+
+    if (!debouncedQuery.length) {
+      setMovies([]);
+      setError("");
+    }
 
     if (debouncedQuery) {
       fetchData();
