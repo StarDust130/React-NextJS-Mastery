@@ -10,9 +10,14 @@ export default function App() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=matrix`)
-      .then((response) => response.json())
-      .then((data) => setMovies(data.Search));
+    async function fetchData() {
+      const response = await fetch(
+        `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=matrix`
+      );
+      const data = await response.json();
+      setMovies(data.Search);
+    }
+    fetchData();
   }, []);
 
   return (
