@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const useLocalStorageState = (key, initialState) => {
   const [value, setValue] = useState(() => {
     const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : [];
+    return data ? JSON.parse(data) : initialState;
   });
 
   useEffect(() => {
