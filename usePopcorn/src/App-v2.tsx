@@ -187,19 +187,22 @@ function Search({ query, setQuery }) {
     inputEl.current.focus();
   }, []);
 
- useEffect(() => {
-   const handleEnterPress = (e) => {
-     if (e.key === "Enter") {
-       inputEl.current.focus();
-     }
-   };
+  useEffect(() => {
+    const handleEnterPress = (e) => {
+      if (document.activeElement === inputEl.current) return;
 
-   document.addEventListener("keydown", handleEnterPress);
+      if (e.key === "Enter") {
+        inputEl.current.focus();
+        setQuery("");
+      }
+    };
 
-   return () => {
-     document.removeEventListener("keydown", handleEnterPress); // Clean up event listener
-   };
- }, []);
+    document.addEventListener("keydown", handleEnterPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleEnterPress); // Clean up event listener
+    };
+  }, []);
 
   return (
     <input
