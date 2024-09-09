@@ -5,7 +5,6 @@ export const useMovie = (query) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const KEY = "30c03942";
- 
 
   useEffect(
     function () {
@@ -45,7 +44,6 @@ export const useMovie = (query) => {
         return;
       }
 
-    //   handleCloseMovie();
       fetchMovies();
 
       return function () {
