@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useEffect, useState, useRef } from "react";
 import StarRating from "./components/StarRating";
 
@@ -184,6 +186,20 @@ function Search({ query, setQuery }) {
   useEffect(() => {
     inputEl.current.focus();
   }, []);
+
+ useEffect(() => {
+   const handleEnterPress = (e) => {
+     if (e.key === "Enter") {
+       inputEl.current.focus();
+     }
+   };
+
+   document.addEventListener("keydown", handleEnterPress);
+
+   return () => {
+     document.removeEventListener("keydown", handleEnterPress); // Clean up event listener
+   };
+ }, []);
 
   return (
     <input
