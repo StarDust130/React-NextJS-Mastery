@@ -23,6 +23,7 @@ export default function App() {
       setDebouncedQuery(query);
     }, 500); // Adjust debounce delay as needed (500ms in this case)
 
+    
     return () => {
       clearTimeout(timerId); // Clean up the timer on unmount or query change
     };
