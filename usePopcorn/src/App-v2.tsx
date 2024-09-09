@@ -4,7 +4,7 @@ import StarRating from "./components/StarRating";
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-const KEY = "f84fc31d";
+const KEY = "30c03942";
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -179,19 +179,17 @@ function Logo() {
 }
 
 function Search({ query, setQuery }) {
-  const inputEL = useRef(null);
+  const inputEl = useRef(null);
 
-  useEffect(function () {
-    inputEL.current.focus();
+  useEffect(() => {
+    inputEl.current.focus();
   }, []);
-
 
   return (
     <input
       className="search"
-      ref={inputEL}
+      ref={inputEl}
       type="text"
-      
       placeholder="Search movies..."
       value={query}
       onChange={(e) => setQuery(e.target.value)}
