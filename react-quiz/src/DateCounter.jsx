@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 
+const intitialState = { count: 0, step: 1 };
 function reducer(state, action) {
   switch (action.type) {
     case "increment":
@@ -9,7 +10,7 @@ function reducer(state, action) {
     case "setCount":
       return { ...state, count: action.value };
     case "reset":
-      return { count: 0 };
+      return intitialState;
     case "setStep":
       return { ...state, step: action.value };
     default:
@@ -18,8 +19,6 @@ function reducer(state, action) {
 }
 
 export function DateCounter() {
-  const intitialState = { count: 0, step: 1 };
-
   const [state, dispatch] = useReducer(reducer, intitialState);
 
   const { count, step } = state;
