@@ -10,6 +10,7 @@ import NextButton from "./components/NextButton";
 import Progress from "./components/Progress";
 import Finished from "./components/Finished";
 import RestartGame from "./components/RestartGame";
+import Timer from "./components/Timer";
 
 const initialState = {
   questions: [],
@@ -19,7 +20,10 @@ const initialState = {
   answer: null,
   points: 0,
   highscore: 0,
+  secondsRemaining: null,
 };
+
+const SECS_PER_QUESTION = 10;
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,7 +32,11 @@ const reducer = (state, action) => {
     case "dataFailed":
       return { ...state, status: "error" };
     case "start":
-      return { ...state, status: "active" };
+      return {
+        ...state,
+        status: "active",
+        secondsRemaining: state.questions.length * SECS_PER_QUESTION,
+      };
     case "newAnswer": {
       const question = state.questions.at(state.index);
       return {
@@ -42,14 +50,21 @@ const reducer = (state, action) => {
     }
     case "nextQuestion":
       return { ...state, index: state.index + 1, answer: null };
-    case "restart":
-      return { ...initialState, questions: state.question, status: "ready" };
     case "finish":
       return {
         ...state,
         status: "finished",
         highscore:
           state.points > state.highscore ? state.points : state.highscore,
+      };
+    case "restart":
+      return { ...initialState, questions: state.questions, status: "ready" };
+
+    case "tick":
+      return {
+        ...state,
+        secondsRemaining: state.secondsRemaining - 1,
+        status: state.secondsRemaining === 0 ? "finished" : state.status,
       };
 
     default:
@@ -58,10 +73,12 @@ const reducer = (state, action) => {
 };
 
 const App = () => {
-  const [{ questions, status, index, answer, points, highscore }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { questions, status, index, answer, points, highscore, secondsRemaining },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
-  const maxPoints = questions.reduce((prev, curr) => prev + curr.points, 0);
+  const maxPoints = questions?.reduce((prev, curr) => prev + curr.points, 0);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -82,10 +99,10 @@ const App = () => {
       <MainComp>
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && (
-          <StartScreen length={questions.length} dispatch={dispatch} />
+        {status === "ready" && questions && questions.length > 0 && (
+          <StartScreen length={questions?.length} dispatch={dispatch} />
         )}
-        {status === "active" && (
+        {status === "active" && questions && questions.length > 0 && (
           <>
             <Progress
               index={index}
@@ -103,12 +120,15 @@ const App = () => {
                 0
               )}
             />
-            <NextButton
-              dispatch={dispatch}
-              numQuestion={questions.length}
-              answer={answer}
-              index={index}
-            />
+            <footer>
+              <Timer dispatch={dispatch} secondsRemaining={secondsRemaining} />{" "}
+              <NextButton
+                dispatch={dispatch}
+                numQuestion={questions.length}
+                answer={answer}
+                index={index}
+              />
+            </footer>
           </>
         )}
 
