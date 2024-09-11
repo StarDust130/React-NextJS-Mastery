@@ -4,6 +4,7 @@ import MainComp from "./components/MainComp";
 import Loader from "./components/Loader";
 import Error from "./components/Error";
 import StartScreen from "./components/StartScreen";
+import Question from "./components/Question";
 
 const initialState = {
   questions: [],
@@ -18,6 +19,8 @@ const reducer = (state, action) => {
       return { ...state, questions: action.data, status: "ready" };
     case "dataFailed":
       return { ...state, status: "error" };
+    case "start":
+      return { ...state, status: "active" };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -46,7 +49,10 @@ const App = () => {
       <MainComp>
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && <StartScreen length={questions.length} />}
+        {status === "ready" && (
+          <StartScreen length={questions.length} dispatch={dispatch} />
+        )}
+        {status === "active" && <Question />}
       </MainComp>
     </div>
   );
