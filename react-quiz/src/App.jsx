@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import MainComp from "./components/MainComp";
 import Loader from "./components/Loader";
 import Error from "./components/Error";
+import StartScreen from "./components/StartScreen";
 
 const initialState = {
   questions: [],
@@ -45,11 +46,7 @@ const App = () => {
       <MainComp>
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && (
-          <>
-            
-          </>
-        )}
+        {status === "ready" && <StartScreen length={questions.length} />}
       </MainComp>
     </div>
   );
