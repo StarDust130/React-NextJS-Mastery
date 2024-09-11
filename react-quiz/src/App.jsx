@@ -40,8 +40,8 @@ const reducer = (state, action) => {
     }
     case "nextQuestion":
       return { ...state, index: state.index + 1, answer: null };
-    case "finishGame":
-      return { ...state, index: state.index > 14, status: "finished" };
+    case "finish":
+      return { ...state, status: "finished" };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
