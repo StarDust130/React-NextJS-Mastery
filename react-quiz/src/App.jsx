@@ -8,6 +8,7 @@ import StartScreen from "./components/StartScreen";
 import Question from "./components/Question";
 import NextButton from "./components/NextButton";
 import Progress from "./components/Progress";
+import Finished from "./components/Finished";
 
 const initialState = {
   questions: [],
@@ -39,6 +40,8 @@ const reducer = (state, action) => {
     }
     case "nextQuestion":
       return { ...state, index: state.index + 1, answer: null };
+    case "finishGame":
+      return { ...state, index: state.index > 14, status: "finished" };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -51,7 +54,7 @@ const App = () => {
     initialState
   );
 
-  const maxPoints = questions.reduce((prev, curr) => prev + curr.points , 0);
+  const maxPoints = questions.reduce((prev, curr) => prev + curr.points, 0);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -93,8 +96,17 @@ const App = () => {
                 0
               )}
             />
-            <NextButton dispatch={dispatch} answer={answer} />
+            <NextButton
+              dispatch={dispatch}
+              numQuestion={questions.length}
+              answer={answer}
+              index={index}
+            />
           </>
+        )}
+
+        {status === "finished" && (
+          <Finished points={points} maxPoints={maxPoints} />
         )}
       </MainComp>
     </div>
