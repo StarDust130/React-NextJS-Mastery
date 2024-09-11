@@ -12,7 +12,8 @@ const initialState = {
   // loading,  error , ready , active , finished
   status: " loading",
   index: 0,
-  answer: "",
+  answer: null,
+  points: 0,
 };
 
 const reducer = (state, action) => {
@@ -23,8 +24,17 @@ const reducer = (state, action) => {
       return { ...state, status: "error" };
     case "start":
       return { ...state, status: "active" };
-    case "newAnswer":
-      return { ...state, answer: action.payload };
+    case "newAnswer": {
+      const question = state.question.at(state.index);
+      return {
+        ...state,
+        answer: action.payload,
+        points:
+          action.payload === question.correctOption
+            ? state.points + question.points
+            : state.points,
+      };
+    }
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
