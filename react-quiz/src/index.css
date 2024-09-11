@@ -42,10 +42,10 @@ body {
 
 .app-header {
   width: 66rem;
-  margin-bottom: 4rem;
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .error {
