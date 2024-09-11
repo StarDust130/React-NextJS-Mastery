@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   MapContainer,
