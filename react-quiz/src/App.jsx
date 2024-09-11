@@ -148,3 +148,10 @@ const App = () => {
   );
 };
 export default App;
+
+
+//! Task to Add:
+// - Add high score to api
+// - Add back button so user can change answer
+// - User Choose difficulty level
+// - User Number of questions
