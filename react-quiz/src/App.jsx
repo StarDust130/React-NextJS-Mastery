@@ -9,6 +9,7 @@ import Question from "./components/Question";
 import NextButton from "./components/NextButton";
 import Progress from "./components/Progress";
 import Finished from "./components/Finished";
+import RestartGame from "./components/RestartGame";
 
 const initialState = {
   questions: [],
@@ -41,6 +42,8 @@ const reducer = (state, action) => {
     }
     case "nextQuestion":
       return { ...state, index: state.index + 1, answer: null };
+    case "restart":
+      return { ...state, index: 0, answer: null, points: 0, status: "active" };
     case "finish":
       return {
         ...state,
@@ -110,11 +113,15 @@ const App = () => {
         )}
 
         {status === "finished" && (
-          <Finished
-            points={points}
-            maxPoints={maxPoints}
-            highscore={highscore}
-          />
+          <>
+            <Finished
+              points={points}
+              maxPoints={maxPoints}
+              highscore={highscore}
+            />
+
+            <RestartGame dispatch={dispatch} />
+          </>
         )}
       </MainComp>
     </div>
