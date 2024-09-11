@@ -43,7 +43,7 @@ const reducer = (state, action) => {
     case "nextQuestion":
       return { ...state, index: state.index + 1, answer: null };
     case "restart":
-      return { ...state, index: 0, answer: null, points: 0, status: "active" };
+      return { ...initialState, questions: state.question, status: "ready" };
     case "finish":
       return {
         ...state,
