@@ -1,6 +1,8 @@
 import { useEffect, useReducer } from "react";
 import Header from "./components/Header";
 import MainComp from "./components/MainComp";
+import Loader from "./components/Loader";
+import Error from "./components/Error";
 
 const initialState = {
   questions: [],
@@ -13,6 +15,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "dataRecieved":
       return { ...state, questions: action.data, status: "ready" };
+    case "dataFailed":
+      return { ...state, status: "error" };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -20,7 +24,7 @@ const reducer = (state, action) => {
 };
 
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -29,7 +33,7 @@ const App = () => {
         const data = await response.json();
         dispatch({ type: "dataRecieved", data });
       } catch (error) {
-        console.error("Error fetching questions: ", error);
+        dispatch({ type: "dataFailed" });
       }
     };
     fetchQuestions();
@@ -39,13 +43,13 @@ const App = () => {
     <div className="app">
       <Header />
       <MainComp>
-        <h1>React Quiz</h1>
-        <p>
-          This is a quiz to test your knowledge of React. It is a multiple
-          choice quiz with 10 questions. Each question has 4 possible answers,
-          but only one of them is correct. You can choose only one answer per
-          question. At the end of the quiz, you will see your score.
-        </p>
+        {status === "loading" && <Loader />}
+        {status === "error" && <Error />}
+        {status === "ready" && (
+          <>
+            
+          </>
+        )}
       </MainComp>
     </div>
   );
