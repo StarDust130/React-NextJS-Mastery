@@ -6,6 +6,7 @@ import PackingList from "./components/PackingList";
 import Search from "./components/Search";
 import Filters from "./components/Filters";
 
+
 interface ItemType {
   id: number;
   desc: string;
