@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deposit, requestLoan, withdraw } from "./accountSlice";
 
 function AccountOperations() {
   const [depositAmount, setDepositAmount] = useState("");
@@ -7,17 +9,52 @@ function AccountOperations() {
   const [loanPurpose, setLoanPurpose] = useState("");
   const [currency, setCurrency] = useState("USD");
 
-  function handleDeposit() {}
+  const dispatch = useDispatch();
+  const account = useSelector((state) => state.account);
 
-  function handleWithdrawal() {}
+  function handleDeposit() {
+    if (depositAmount === "") {
+      alert("Please enter a deposit amount");
+      return;
+    }
 
-  function handleRequestLoan() {}
+    dispatch(deposit(depositAmount));
+    setDepositAmount("");
+  }
 
-  function handlePayLoan() {}
+  function handleWithdrawal() {
+    if (withdrawalAmount === "") {
+      alert("Please enter a withdrawal amount");
+      return;
+    }
+
+    dispatch(withdraw(withdrawalAmount));
+    setWithdrawalAmount("");
+  }
+
+  function handleRequestLoan() {
+    if (loanAmount === "" || loanPurpose === "") {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    dispatch(requestLoan(loanAmount, loanPurpose));
+    setLoanAmount("");
+    setLoanPurpose("");
+  }
+
+  function handlePayLoan() {
+    if (account.loan === 0) {
+      alert("You don't have a loan to pay");
+      return;
+    }
+    dispatch(withdraw(account.loan));
+  }
 
   return (
     <div>
       <h2>Your account operations</h2>
+      <h2>Your account Balance: {account.balance.toLocaleString()}</h2>
       <div className="inputs">
         <div>
           <label>Deposit</label>
@@ -30,12 +67,15 @@ function AccountOperations() {
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}
           >
+            <option value="USD">(₹)IN Rupee</option>
             <option value="USD">US Dollar</option>
             <option value="EUR">Euro</option>
             <option value="GBP">British Pound</option>
           </select>
 
-          <button onClick={handleDeposit}>Deposit {depositAmount}</button>
+          <button onClick={handleDeposit}>
+            Deposit {depositAmount.toLocaleString()}
+          </button>
         </div>
 
         <div>
