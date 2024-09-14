@@ -41,7 +41,7 @@ function App() {
     [isFakeDark]
   );
 
-  const archiveOptions = useMemo(() => {
+  const archiveOptions =  useMemo(() => {
     return {
       show: true,
       title: `Post archive in addition to ${posts.length} main posts`,
