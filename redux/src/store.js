@@ -4,7 +4,7 @@ import userReducer from "./features/users/userSlice";
 
 const rootReducer = combineReducers({
   account: accountReducer,
-  user: userReducer,
+  customer: userReducer,
 });
 
 const store = createStore(rootReducer);
