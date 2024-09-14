@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deposit, requestLoan, withdraw } from "./accountSlice";
+import { set } from "mongoose";
 
 function AccountOperations() {
   const [depositAmount, setDepositAmount] = useState("");
@@ -23,8 +25,9 @@ function AccountOperations() {
       return;
     }
 
-    dispatch(deposit(depositAmount));
+    dispatch(deposit(depositAmount, currency));
     setDepositAmount("");
+    setCurrency("");
   }
 
   function handleWithdrawal() {
@@ -72,8 +75,8 @@ function AccountOperations() {
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}
           >
-            <option value="USD">(₹)IN Rupee</option>
             <option value="USD">US Dollar</option>
+            <option value="INR">(₹)IN Rupee</option>
             <option value="EUR">Euro</option>
             <option value="GBP">British Pound</option>
           </select>
