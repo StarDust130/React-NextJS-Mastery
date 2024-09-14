@@ -10,7 +10,12 @@ function AccountOperations() {
   const [currency, setCurrency] = useState("USD");
 
   const dispatch = useDispatch();
-  const account = useSelector((state) => state.account);
+  const {
+    loan: currentloan,
+    loanPurpose: currentLoanPurpose,
+    balance,
+  } = useSelector((store) => store.account);
+  console.log("currentloan", currentloan);
 
   function handleDeposit() {
     if (depositAmount === "") {
@@ -44,17 +49,17 @@ function AccountOperations() {
   }
 
   function handlePayLoan() {
-    if (account.loan === 0) {
+    if (currentloan === 0) {
       alert("You don't have a loan to pay");
       return;
     }
-    dispatch(withdraw(account.loan));
+    dispatch(withdraw(currentloan));
   }
 
   return (
     <div>
       <h2>Your account operations</h2>
-      <h2>Your account Balance: {account.balance.toLocaleString()}</h2>
+
       <div className="inputs">
         <div>
           <label>Deposit</label>
@@ -106,10 +111,14 @@ function AccountOperations() {
           <button onClick={handleRequestLoan}>Request loan</button>
         </div>
 
-        <div>
-          <span>Pay back $X</span>
-          <button onClick={handlePayLoan}>Pay loan</button>
-        </div>
+        {currentloan > 0 && (
+          <div>
+            <span>
+              Pay back {currentloan} for ({currentLoanPurpose})
+            </span>
+            <button onClick={handlePayLoan}>Pay loan</button>
+          </div>
+        )}
       </div>
     </div>
   );

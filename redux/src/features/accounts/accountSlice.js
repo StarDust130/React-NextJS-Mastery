@@ -20,7 +20,7 @@ const accountReducer = (state = initalStateAccount, action) => {
       if (state.loan > 0) return state;
       return {
         ...state,
-        loan: state.loan.amount,
+        loan: action.payload.amount, // Set loan to the requested amount
         loanPurpose: action.payload.purpose,
         balance: state.balance + action.payload.amount,
       };
