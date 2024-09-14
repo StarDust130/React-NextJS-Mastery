@@ -100,7 +100,7 @@ const accountSlice = createSlice({
       state.balance -= action.payload;
     },
     requestLoan: (state, action) => {
-      if (state.loan > 0) return state;
+      if (state.loan > 0) return;
       state.loan = action.payload.amount;
       state.loanPurpose = action.payload.purpose;
       state.balance += action.payload.amount;
