@@ -22,8 +22,9 @@ const reducer = (state = initalState, action) => {
       if (state.loan > 0) return state;
       return {
         ...state,
-        loan: state.loan + action.payload,
-        loanPurpose: action.purpose,
+        loan: state.loan.amount,
+        loanPurpose: action.payload.purpose,
+        balance: state.balance + action.payload.amount,
       };
     case "account/payLoan":
       return {
@@ -38,5 +39,7 @@ const reducer = (state = initalState, action) => {
 };
 
 const store = createStore(reducer);
+
+store.dispatch({ type: "account/deposit", payload: 100 });
 
 export default store;
