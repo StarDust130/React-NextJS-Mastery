@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 const initalStateAccount = {
   balance: 0,
   loan: 0,
   loanPurpose: "",
+  isLoading: false,
 };
 
 const accountReducer = (state = initalStateAccount, action) => {
@@ -10,6 +12,7 @@ const accountReducer = (state = initalStateAccount, action) => {
       return {
         ...state,
         balance: state.balance + action.payload,
+        isLoading: false,
       };
     case "account/withdraw":
       return {
@@ -31,6 +34,11 @@ const accountReducer = (state = initalStateAccount, action) => {
         loanPurpose: "",
         balance: state.balance - state.loan,
       };
+    case "account/convertingCurrency":
+      return {
+        ...state,
+        isLoading: true,
+      };
     default:
       return state;
   }
@@ -43,6 +51,7 @@ export function deposit(amount, currency) {
     return { type: "account/deposit", payload: amount };
   }
   return async function (dispatch, getState) {
+    dispatch({ type: "account/convertingCurrency" });
     const res = await fetch(
       `https://api.frankfurter.app/latest?amount=${amount}&from=${currency}&to=USD`
     );
@@ -51,7 +60,7 @@ export function deposit(amount, currency) {
 
     const converted = data.rates.USD;
 
-    return dispatch({ type: "account/deposit", payload: converted });
+    dispatch({ type: "account/deposit", payload: converted });
   };
 }
 
