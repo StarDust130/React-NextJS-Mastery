@@ -4,6 +4,7 @@ import {pizzaData} from './data'
 
 function App() {
 
+  
 
   return (
     <>
