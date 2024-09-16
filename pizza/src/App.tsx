@@ -3,6 +3,7 @@ import Pizza from './components/Pizza';
 import {pizzaData} from './data'
 
 function App() {
+
   
 
   return (
