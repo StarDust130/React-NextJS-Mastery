@@ -1,3 +1,8 @@
+import styled from "styled-components";
+import { getCabins } from "../../services/apiCabins";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../../ui/Spinner";
+import {Table} from "../../ui/Table";
 // // import styled from 'styled-components';
 // // import CabinRow from "features/cabins/CabinRow";
 // // import Spinner from "ui/Spinner";
@@ -7,10 +12,6 @@
 // // import { useCabins } from "features/cabins/useCabins";
 // // import { useSearchParams } from "react-router-dom";
 // // import { Suspense } from "react";
-
-import styled from "styled-components";
-import { getCabins } from "../../services/apiCabins";
-import { useQuery } from "@tanstack/react-query";
 
 // // v2
 // // Right now this is not really reusable... But we will want to use a similar table for guests as well, but with different columns. ALSO, right now we are defining these columns in BOTH the TableHeader and the CabinRow, which is not good at all. Instead, it would be much better to simply pass the columns into the Table, and the table would give access to the columns to both the header and row. So how can we do that? Well we can again use a compound component! We don't HAVE to do it like this, there's a million ways to implement a table, also without CSS Grid, but this is what I chose
@@ -121,13 +122,21 @@ const TableHeader = styled.header`
 `;
 
 const CabinTable = () => {
-  const x = useQuery({
+  const {
+    isLoading,
+    data: cabins,
+    error,
+  } = useQuery({
     queryKey: ["cabins"],
     queryFn: getCabins,
   });
 
-  console.log(x);
+  if (isLoading) return <Spinner />;
 
-  return <div>CabinTable</div>;
+  return (
+    <Table>
+      <TableHeader></TableHeader>
+    </Table>
+  );
 };
 export default CabinTable;
