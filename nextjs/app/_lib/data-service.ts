@@ -14,7 +14,7 @@ export async function getCabin(id: any) {
     .single();
 
   // For testing
-  // await new Promise((res) => setTimeout(res, 1000));
+  // await new Promise((res) => setTimeout(res, 10000));
 
   if (error) {
     console.error(error);
@@ -42,6 +42,8 @@ export const getCabins = async function () {
     .from("cabins")
     .select("id, name, maxCapacity, regularPrice, discount, image")
     .order("name");
+
+  // await new Promise((res) => setTimeout(res, 3000));
 
   if (error) {
     console.error(error);
@@ -217,10 +219,7 @@ export async function updateBooking(id: any, updatedFields: any) {
 // DELETE
 
 export async function deleteBooking(id: any) {
-  const { data, error } = await supabase
-    .from("bookings")
-    .delete()
-    .eq("id", id);
+  const { data, error } = await supabase.from("bookings").delete().eq("id", id);
 
   if (error) {
     console.error(error);
