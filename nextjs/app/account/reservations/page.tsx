@@ -1,13 +1,14 @@
-// import ReservationCard from "/ReservationCard";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import ReservationCard from "/ReservationCard";
 const page = () => {
-  //   const bookings = [];
+    const bookings: any[] = [];
   return (
     <div>
       <h2 className="font-semibold text-2xl text-accent-400 mb-7">
         Your reservations
       </h2>
 
-      {/* {bookings.length === 0 ? (
+      {bookings.length === 0 ? (
         <p className="text-lg">
           You have no reservations yet. Check out our{" "}
           <a className="underline text-accent-500" href="/cabins">
@@ -20,7 +21,7 @@ const page = () => {
             <ReservationCard booking={booking} key={booking.id} />
           ))}
         </ul>
-      )} */}
+      )}
     </div>
   );
 };
