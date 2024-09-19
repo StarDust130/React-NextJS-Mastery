@@ -1,6 +1,6 @@
 import CabinList from "../_components/CabinList";
 import { Suspense } from "react";
-import Spinner from "../_components/Spinner";
+import SpinnerMini from "../_components/SpinnerMini";
 
 const page = () => {
   return (
@@ -16,7 +16,7 @@ const page = () => {
         home away from home. The perfect spot for a peaceful, calm vacation.
         Welcome to paradise.
       </p>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<SpinnerMini />}>
         <CabinList />
       </Suspense>
     </div>
