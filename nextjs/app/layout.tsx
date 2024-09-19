@@ -14,11 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "DragonFly",
-  description: "A Next.js starter with Tailwind CSS and TypeScript",
-  icons: {
-    icon: "icon.webp",
-  },
+  title: "The Whild Oasis",
+  description: "A collection of thoughts and ideas.",
 };
 
 export default function RootLayout({
