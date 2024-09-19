@@ -13,7 +13,7 @@ const cabin = {
     "https://dclaevazetcjjkrzczpc.supabase.co/storage/v1/object/public/cabin-images/cabin-001.jpg",
 };
 
-export default function Page() {
+const page = () => {
   const { id, name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
 
@@ -63,4 +63,6 @@ export default function Page() {
       </div>
     </div>
   );
-}
+};
+
+export default page;
