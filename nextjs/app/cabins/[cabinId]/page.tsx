@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getCabin } from "@/app/_lib/data-service";
+import { getCabin, getCabins } from "@/app/_lib/data-service";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,6 +8,11 @@ import Link from "next/link";
 export const generateMetadata = async ({ params }: any) => {
   const { name } = await getCabin(params.cabinId);
   return { title: `Cabin ${name}` };
+};
+
+export const generateStaticParams = async () => {
+  const cabins = await getCabins();
+  return cabins.map((cabin: any) => ({ params: { cabinId: cabin.id } }));
 };
 
 const page = async ({ params }: any) => {
