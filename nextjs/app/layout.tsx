@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${josefinSans} antialiased`}>{children}</body>
+      <body className={`${josefinSans.className} antialiased`}>{children}</body>
     </html>
   );
 }
