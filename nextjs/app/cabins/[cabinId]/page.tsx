@@ -5,6 +5,11 @@ import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 
+export const generateMetadata = async ({ params }: any) => {
+  const { name } = await getCabin(params.cabinId);
+  return { title: `Cabin ${name}` };
+};
+
 const page = async ({ params }: any) => {
   const cabin = await getCabin(params.cabinId);
 
