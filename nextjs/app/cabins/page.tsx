@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import CabinCard from "@/app/_components/CabinCard";
-const page = () => {
-  const cabins: any[] = [];
+import { getCabins } from "../_lib/data-service";
+
+const page = async () => {
+  const cabins = await getCabins();
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">

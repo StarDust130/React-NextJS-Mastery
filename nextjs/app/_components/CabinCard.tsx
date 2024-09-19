@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { UsersIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
 
-function CabinCard({ cabin }) {
+function CabinCard({ cabin }: any) {
   const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
 
   return (
