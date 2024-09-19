@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ReservationCard from "/ReservationCard";
+import ReservationCard from "./ReservationCard";
 const page = () => {
-    const bookings: any[] = [];
+  const bookings: any[] = [];
   return (
     <div>
       <h2 className="font-semibold text-2xl text-accent-400 mb-7">
