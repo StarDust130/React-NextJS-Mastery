@@ -2,7 +2,7 @@ import CabinList from "../_components/CabinList";
 import { Suspense } from "react";
 import Spinner from "../_components/Spinner";
 
-const page = async () => {
+const page = () => {
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
