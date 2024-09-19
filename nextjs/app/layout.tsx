@@ -20,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${josefinSans.className} antialiased`}>
+      <body
+        className={`${josefinSans.className} antialiased bg-primary-950 text-primary-100 min-h-screen`}
+      >
         <Header />
         {children}
       </body>
