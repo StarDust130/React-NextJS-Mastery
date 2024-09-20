@@ -5,16 +5,18 @@ import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 import TextExpander from "@/app/_components/TextExpander";
+import DateSelector from "@/app/_components/DateSelector";
+import ReservationForm from "@/app/_components/ReservationForm";
 
 export const generateMetadata = async ({ params }: any) => {
   const { name } = await getCabin(params.cabinId);
   return { title: `Cabin ${name}` };
 };
 
-export const generateStaticParams = async () => {
-  const cabins = await getCabins();
-  return cabins.map((cabin: any) => ({ params: { cabinId: cabin.id } }));
-};
+// export const generateStaticParams = async () => {
+//   const cabins = await getCabins();
+//   return cabins.map((cabin: any) => ({ params: { cabinId: cabin.id } }));
+// };
 
 const page = async ({ params }: any) => {
   const cabin = await getCabin(params.cabinId);
@@ -76,9 +78,15 @@ const page = async ({ params }: any) => {
       </div>
 
       <div>
-        <h2 className="text-5xl font-semibold text-center">
-          Reserve today. Pay on arrival.
+        <h2 className="text-5xl font-semibold text-center text-accent-400">
+          Reserve {cabin.name} today. Pay on arrival.
         </h2>
+
+        <div className="grid grid-cols-2 border border-primary-800 min-h-[400px] ">
+          <DateSelector />
+          <ReservationForm />
+
+        </div>
       </div>
     </div>
   );
