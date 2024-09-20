@@ -11,7 +11,7 @@ const CabinList = async ({ filter }: any) => {
   let displayCabins: any;
   if (filter === "all") displayCabins = cabins;
   if (filter === "small")
-    displayCabins = cabins.filter((cabin) => cabin.maxCapacity <= 1);
+    displayCabins = cabins.filter((cabin) => cabin.maxCapacity <= 3);
   if (filter === "medium")
     displayCabins = cabins.filter(
       (cabin) => cabin.maxCapacity >= 4 && cabin.maxCapacity <= 7

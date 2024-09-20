@@ -9,40 +9,34 @@ const Filter = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  function handleFilter(filter: any) {
+  const currentFilter = searchParams.get("capacity") || "all";
+
+  const filters = [
+    { label: "All cabins", value: "all" },
+    { label: "1—3", value: "small" },
+    { label: "4—7", value: "medium" },
+    { label: "8—12", value: "large" },
+  ];
+
+  function handleFilter(filter: string) {
     const params = new URLSearchParams(searchParams);
-
     params.set("capacity", filter);
-
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
   return (
-    <div className="border border-primary-800 flex ">
-      <button
-        onClick={() => handleFilter("all")}
-        className={`px-5 py-2 border-primary-800 border-r-2 hover:bg-primary-800 `}
-      >
-        All cabins
-      </button>
-      <button
-        onClick={() => handleFilter("small")}
-        className="px-5 py-2 border-primary-800 border-r-2  hover:bg-primary-800"
-      >
-        1&mdash;3
-      </button>
-      <button
-        onClick={() => handleFilter("medium")}
-        className="px-5 py-2 border-primary-800 border-r-2  hover:bg-primary-800"
-      >
-        4&mdash;7
-      </button>
-      <button
-        onClick={() => handleFilter("large")}
-        className="px-5 py-2 hover:bg-primary-800"
-      >
-        8&mdash;12
-      </button>
+    <div className="border border-primary-800 flex">
+      {filters.map((filter) => (
+        <button
+          key={filter.value}
+          onClick={() => handleFilter(filter.value)}
+          className={`px-5 py-2 border-primary-800 border-r-2 hover:bg-primary-800 ${
+            currentFilter === filter.value ? "bg-primary-800" : ""
+          }`}
+        >
+          {filter.label}
+        </button>
+      ))}
     </div>
   );
 };
