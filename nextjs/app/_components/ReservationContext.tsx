@@ -24,7 +24,6 @@ export const ReservationProvider = ({ children }: any) => {
   );
 };
 
-
 export const useReservation = () => {
   const context = useContext(ReservationContext);
   if (!context) {
