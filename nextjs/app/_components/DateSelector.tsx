@@ -23,8 +23,7 @@ function DateSelector({ setting, booked, cabin }: any) {
   const range = { from: null, to: null };
 
   // SETTINGS
-  const minBookingLength = 1;
-  const maxBookingLength = 23;
+  const { minBookingLength, maxBookingLength } = setting;
 
   return (
     <div className="flex  flex-col w-full items-center justify-between">

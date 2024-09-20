@@ -12,7 +12,7 @@ const Reservation = async ({ cabin }: any) => {
     <>
       <div className="flex justify-between items-center border border-primary-800 min-h-[400px] ">
         <DateSelector setting={setting} booked={booked} cabin={cabin} />
-        <ReservationForm />
+        <ReservationForm cabin={cabin} />
       </div>
     </>
   );
