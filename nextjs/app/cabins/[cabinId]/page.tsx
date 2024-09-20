@@ -12,6 +12,7 @@ import Link from "next/link";
 import TextExpander from "@/app/_components/TextExpander";
 import DateSelector from "@/app/_components/DateSelector";
 import ReservationForm from "@/app/_components/ReservationForm";
+import Reservation from "@/app/_components/Reservation";
 
 export const generateMetadata = async ({ params }: any) => {
   const { name } = await getCabin(params.cabinId);
@@ -96,10 +97,7 @@ const page = async ({ params }: any) => {
           Reserve {cabin.name} today. Pay on arrival.
         </h2>
 
-        <div className="flex justify-between items-center border border-primary-800 min-h-[400px] ">
-          <DateSelector />
-          <ReservationForm />
-        </div>
+        <Reservation />
       </div>
     </div>
   );
