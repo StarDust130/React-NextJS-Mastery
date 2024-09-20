@@ -78,14 +78,13 @@ const page = async ({ params }: any) => {
       </div>
 
       <div>
-        <h2 className="text-5xl font-semibold text-center text-accent-400">
+        <h2 className="text-5xl font-semibold text-center text-accent-400 mb-5">
           Reserve {cabin.name} today. Pay on arrival.
         </h2>
 
-        <div className="grid grid-cols-2 border border-primary-800 min-h-[400px] ">
+        <div className="flex justify-between items-center border border-primary-800 min-h-[400px] ">
           <DateSelector />
           <ReservationForm />
-
         </div>
       </div>
     </div>
