@@ -10,8 +10,6 @@ import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 import TextExpander from "@/app/_components/TextExpander";
-import DateSelector from "@/app/_components/DateSelector";
-import ReservationForm from "@/app/_components/ReservationForm";
 import Reservation from "@/app/_components/Reservation";
 
 export const generateMetadata = async ({ params }: any) => {
