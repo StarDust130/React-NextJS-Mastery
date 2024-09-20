@@ -14,10 +14,10 @@ const CabinList = async ({ filter }: any) => {
     displayCabins = cabins.filter((cabin) => cabin.maxCapacity <= 1);
   if (filter === "medium")
     displayCabins = cabins.filter(
-      (cabin) => cabin.maxCapacity >= 2 && cabin.maxCapacity <= 3
+      (cabin) => cabin.maxCapacity >= 4 && cabin.maxCapacity <= 7
     );
   if (filter === "large")
-    displayCabins = cabins.filter((cabin) => cabin.maxCapacity >= 2);
+    displayCabins = cabins.filter((cabin) => cabin.maxCapacity >= 8);
 
   return (
     <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
