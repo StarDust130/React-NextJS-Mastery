@@ -1,16 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  getBookedDatesByCabinId,
-  getCabin,
-  getCabins,
-  getSettings,
-} from "@/app/_lib/data-service";
+import { getCabin } from "@/app/_lib/data-service";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 import TextExpander from "@/app/_components/TextExpander";
 import Reservation from "@/app/_components/Reservation";
+import { Suspense } from "react";
+import Spinner from "@/app/_components/Spinner";
 
 export const generateMetadata = async ({ params }: any) => {
   const { name } = await getCabin(params.cabinId);
@@ -23,16 +20,7 @@ export const generateMetadata = async ({ params }: any) => {
 // };
 
 const page = async ({ params }: any) => {
-  // const cabin = await getCabin(params.cabinId);
-
-  // const setting = await getSettings();
-  // const booked = await getBookedDatesByCabinId(params.cabinId);
-
-  const [cabin, setting, booked] = await Promise.all([
-    getCabin(params.cabinId),
-    getCabin(params.cabinId),
-    getBookedDatesByCabinId(params.cabinId),
-  ]);
+  const cabin = await getCabin(params.cabinId);
 
   const { id, name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
@@ -91,11 +79,16 @@ const page = async ({ params }: any) => {
       </div>
 
       <div>
-        <h2 className="text-5xl font-semibold text-center text-accent-400 mb-5">
+        <h2
+          className="text-5xl font-semibold text-center 
+        text-accent-400 mb-5"
+        >
           Reserve {cabin.name} today. Pay on arrival.
         </h2>
 
-        <Reservation />
+        <Suspense fallback={<Spinner />}>
+          <Reservation params={{ cabinId: id }} />
+        </Suspense>
       </div>
     </div>
   );
