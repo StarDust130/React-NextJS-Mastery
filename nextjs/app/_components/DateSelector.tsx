@@ -28,6 +28,7 @@ function DateSelector({ setting, booked, cabin }: any) {
   return (
     <div className="flex  flex-col w-full items-center justify-between">
       <DayPicker
+        onSelect={(range) => console.log(range)}
         className="pt-12 place-self-center"
         mode="range"
         min={minBookingLength + 1}

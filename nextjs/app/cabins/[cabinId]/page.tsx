@@ -21,8 +21,6 @@ export const generateMetadata = async ({ params }: any) => {
 const page = async ({ params }: any) => {
   const cabin = await getCabin(params.cabinId);
 
- 
-
   return (
     <div className="max-w-6xl mx-auto ">
       <Link
