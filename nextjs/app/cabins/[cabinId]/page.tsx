@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getCabin, getCabins } from "@/app/_lib/data-service";
+import {
+  getBookedDatesByCabinId,
+  getCabin,
+  getCabins,
+  getSettings,
+} from "@/app/_lib/data-service";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +24,16 @@ export const generateMetadata = async ({ params }: any) => {
 // };
 
 const page = async ({ params }: any) => {
-  const cabin = await getCabin(params.cabinId);
+  // const cabin = await getCabin(params.cabinId);
+
+  // const setting = await getSettings();
+  // const booked = await getBookedDatesByCabinId(params.cabinId);
+
+  const [cabin, setting, booked] = await Promise.all([
+    getCabin(params.cabinId),
+    getCabin(params.cabinId),
+    getBookedDatesByCabinId(params.cabinId),
+  ]);
 
   const { id, name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
