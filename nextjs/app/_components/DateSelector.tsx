@@ -15,7 +15,7 @@ function isAlreadyBooked(range: any, datesArr: any) {
   return (
     range.from &&
     range.to &&
-    datesArr.some((date:any) =>
+    datesArr.some((date: any) =>
       isWithinInterval(date, { start: range.from, end: range.to })
     )
   );
@@ -33,7 +33,7 @@ function DateSelector({ settings, cabin, bookedDates }: any) {
   const { minBookingLength, maxBookingLength } = settings;
 
   return (
-    <div className="flex  flex-col w-full items-center justify-between">
+    <div className="flex  flex-col w-full  justify-center">
       <DayPicker
         className="pt-12 place-self-center"
         mode="range"
