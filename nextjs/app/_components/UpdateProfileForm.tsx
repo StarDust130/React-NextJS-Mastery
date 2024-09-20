@@ -1,10 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import SelectCountry from "@/app/_components/SelectCountry";
 
-const UpdateProfileForm = () => {
-    
-  const countryFlag = "pt.jpg";
-  const nationality = "portugal";
+const UpdateProfileForm = ({ children }: any) => {
+  //   const countryFlag = "pt.jpg";
+
   return (
     <>
       <form className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
@@ -35,14 +34,9 @@ const UpdateProfileForm = () => {
               height={30}
             /> */}
           </div>
-
-          <SelectCountry
-            name="nationality"
-            id="nationality"
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
-            defaultCountry={nationality}
-          />
         </div>
+
+        {children}
 
         <div className="space-y-2">
           <label htmlFor="nationalID">National ID number</label>
