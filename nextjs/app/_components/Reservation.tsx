@@ -1,20 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import DateSelector from "./DateSelector";
-import ReservationForm from "./ReservationForm";
-import { getBookedDatesByCabinId, getSettings } from "@/app/_lib/data-service";
 
-const Reservation = async ({ cabin }: any) => {
-  const [setting, booked] = await Promise.all([
+// import { auth } from "../_lib/auth";
+import { getBookedDatesByCabinId, getSettings } from "../_lib/data-service";
+import DateSelector from "./DateSelector";
+
+import ReservationForm from "./ReservationForm";
+
+async function Reservation({ cabin }: any) {
+  const [settings, bookedDates] = await Promise.all([
     getSettings(),
     getBookedDatesByCabinId(cabin.id),
   ]);
+  //   const session = await auth();
+
   return (
-    <>
-      <div className="flex justify-between items-center border border-primary-800 min-h-[400px] ">
-        <DateSelector setting={setting} booked={booked} cabin={cabin} />
-        <ReservationForm cabin={cabin} />
-      </div>
-    </>
+    <div className="grid grid-cols-2 border border-primary-800 min-h-[400px]">
+      <DateSelector
+        settings={settings}
+        bookedDates={bookedDates}
+        cabin={cabin}
+      />
+      {/* {session?.user ? (
+        <ReservationForm cabin={cabin} user={session.user} />
+      ) : (
+        <LoginMessage />
+      )} */}
+
+      <ReservationForm cabin={cabin} />
+    </div>
   );
-};
+}
+
 export default Reservation;

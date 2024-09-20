@@ -1,33 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+
 import { createContext, useContext, useState } from "react";
 
-export const ReservationContext = createContext<any>(null);
+const ReservationContext = createContext<any>();
 
-const initialState = {
-  range: { from: null, to: null },
-  regularPrice: 23,
-  discount: 23,
-  numNights: 23,
-  cabinPrice: 23,
-};
+const initialState = { from: undefined, to: undefined };
 
-export const ReservationProvider = ({ children }: any) => {
-  const [range, setRange] = useState<any>({
-    initialState,
-  });
+function ReservationProvider({ children }: any) {
+  const [range, setRange] = useState(initialState);
+  const resetRange = () => setRange(initialState);
 
   return (
-    <ReservationContext.Provider value={[range, setRange]}>
+    <ReservationContext.Provider value={{ range, setRange, resetRange }}>
       {children}
     </ReservationContext.Provider>
   );
-};
+}
 
-export const useReservation = () => {
+function useReservation() {
   const context = useContext(ReservationContext);
-  if (!context) {
-    throw new Error("useReservation must be used within a ReservationProvider");
-  }
+  if (context === undefined)
+    throw new Error("Context was used outside provider");
   return context;
-};
+}
+
+export { ReservationProvider, useReservation };
