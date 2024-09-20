@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+// import { useReservation } from "./ReservationContext";
+
 function ReservationForm({ cabin }: any) {
-  // CHANGE
+  // const { range } = useReservation();
   const { maxCapacity } = cabin;
 
   return (
