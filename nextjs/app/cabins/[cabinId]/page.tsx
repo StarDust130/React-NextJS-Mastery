@@ -87,7 +87,7 @@ const page = async ({ params }: any) => {
         </h2>
 
         <Suspense fallback={<Spinner />}>
-          <Reservation params={{ cabinId: id }} />
+          <Reservation cabin={cabin} />
         </Suspense>
       </div>
     </div>

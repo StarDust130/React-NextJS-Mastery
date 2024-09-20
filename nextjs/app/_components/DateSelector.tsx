@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { isWithinInterval } from "date-fns";
 import { DayPicker } from "react-day-picker";
@@ -13,7 +14,7 @@ function isAlreadyBooked(range, datesArr) {
   );
 }
 
-function DateSelector() {
+function DateSelector({ setting, booked, cabin }: any) {
   // CHANGE
   const regularPrice = 23;
   const discount = 23;
