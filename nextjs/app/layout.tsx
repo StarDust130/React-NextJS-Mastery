@@ -10,7 +10,7 @@ const josefinSans = Josefin_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "The Whild Oasis",
+  title: "The Wild Oasis",
   description: "A collection of thoughts and ideas.",
 };
 
