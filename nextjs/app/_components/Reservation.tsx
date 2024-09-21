@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// import { auth } from "../_lib/auth";
+import { auth } from "../_lib/auth";
 import { getBookedDatesByCabinId, getSettings } from "../_lib/data-service";
 import DateSelector from "./DateSelector";
+import LoginMessage from "./LoginMessage";
 
 import ReservationForm from "./ReservationForm";
 
@@ -11,7 +12,7 @@ async function Reservation({ cabin }: any) {
     getSettings(),
     getBookedDatesByCabinId(cabin.id),
   ]);
-  //   const session = await auth();
+    const session = await auth();
 
   return (
     <div className="flex justify-between items-center border border-primary-800 min-h-[400px] ">
@@ -20,13 +21,13 @@ async function Reservation({ cabin }: any) {
         bookedDates={bookedDates}
         cabin={cabin}
       />
-      {/* {session?.user ? (
+      {session?.user ? (
         <ReservationForm cabin={cabin} user={session.user} />
       ) : (
         <LoginMessage />
-      )} */}
+      )}
 
-      <ReservationForm cabin={cabin} />
+      {/* <ReservationForm cabin={cabin} /> */}
     </div>
   );
 }
