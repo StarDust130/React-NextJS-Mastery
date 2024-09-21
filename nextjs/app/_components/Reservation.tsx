@@ -12,7 +12,7 @@ async function Reservation({ cabin }: any) {
     getSettings(),
     getBookedDatesByCabinId(cabin.id),
   ]);
-    const session = await auth();
+  const session = await auth();
 
   return (
     <div className="flex justify-between items-center border border-primary-800 min-h-[400px] ">
@@ -26,8 +26,6 @@ async function Reservation({ cabin }: any) {
       ) : (
         <LoginMessage />
       )}
-
-      {/* <ReservationForm cabin={cabin} /> */}
     </div>
   );
 }
