@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
+import { pages } from "next/dist/build/templates/app-page";
 
 const authConfig = {
   providers: [
@@ -10,9 +11,12 @@ const authConfig = {
     }),
   ],
   callbacks: {
-    authorized({ auth, request }: any) {
+    authorized({ auth }: any) {
       return !!auth?.user;
     },
+  },
+  pages: {
+    signIn: "/login",
   },
 };
 
