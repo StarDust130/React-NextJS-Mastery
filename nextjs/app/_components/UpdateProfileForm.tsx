@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-const UpdateProfileForm = ({ children }: any) => {
+const UpdateProfileForm = ({ guest, children }: any) => {
   //   const countryFlag = "pt.jpg";
+  const { fullName, email, nationality, nationalId, countryFlag } = guest;
 
   return (
     <>
@@ -11,6 +12,7 @@ const UpdateProfileForm = ({ children }: any) => {
           <label>Full name</label>
           <input
             disabled
+            defaultValue={fullName}
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
           />
         </div>
@@ -19,6 +21,7 @@ const UpdateProfileForm = ({ children }: any) => {
           <label>Email address</label>
           <input
             disabled
+            defaultValue={email}
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
           />
         </div>

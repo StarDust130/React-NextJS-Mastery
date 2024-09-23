@@ -19,14 +19,21 @@ const authConfig = {
       try {
         const existingGuest = await getGuest(user.email);
 
-        if (!existingGuest)
-          await createGuest({ email: user.email, fullName: user.name });
+        // If guest does not exist, create a new guest
+        if (!existingGuest) {
+          await createGuest({
+            email: user.email,
+            fullName: user.name || "Unknown", // Handle case where name is undefined
+          });
+        }
 
-        return true;
-      } catch {
-        return false;
+        return true; // Return true to continue the login process
+      } catch (error) {
+        console.error("SignIn error:", error);
+        return false; // Return false to prevent login if there's an error
       }
     },
+
     async session({ session, user }: any) {
       const guest = await getGuest(session.user.email);
       session.user.guestId = guest.id;
